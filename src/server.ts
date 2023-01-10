@@ -8,13 +8,13 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   const app = express();
 
   // Set the network port
-  const port = process.env.PORT || 8082;
+  const port: number | string = process.env.PORT || 8082;
   
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
-  app.get( "/filteredimage", async ( req, res ) => {
-    let { image_url } = req.query;
+  app.get( "/filteredimage", async (req: express.Request, res: express.Response) => {
+    let { image_url } : {image_url:string} = req.query;
     if (!image_url) {
       return res.status(400).send({ message: 'image_url is required' });
     }
@@ -29,7 +29,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req: express.Request, res: express.Response) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   
